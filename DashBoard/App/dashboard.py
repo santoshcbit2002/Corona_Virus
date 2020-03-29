@@ -306,7 +306,7 @@ children=[
                 dcc.Dropdown(
                 id='countries-menu',
                 options=menu_dict_list,
-                value=['China'],
+                value=['China','US','United Kingdom','Spain','Italy'],
                 placeholder="Select Countries",
                 multi=True
                         ),
