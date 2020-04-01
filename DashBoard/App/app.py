@@ -783,7 +783,7 @@ def update_graph(country_name):
         temp['percentage_increase']=temp['percentage_increase'].apply(lambda x: round(x,3))
         temp.replace([np.inf, -np.inf], np.nan)
         temp.dropna(inplace=True)
-        rate_of_increase_sampled=temp.resample('D').interpolate()[::7]
+        rate_of_increase_sampled=temp.resample('D').interpolate()[::3]
 
         data.append(go.Scatter(x=rate_of_increase_sampled.index,
                                                 y=rate_of_increase_sampled['percentage_increase'], 
@@ -913,4 +913,4 @@ def update_word_map(interval):
             }
 """
 if __name__ == '__main__':
-    app.run_server(debug=True)  
+    app.run_server(debug=False)  

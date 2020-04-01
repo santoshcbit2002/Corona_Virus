@@ -17,7 +17,7 @@ from geopy.exc import GeocoderTimedOut
 warnings.filterwarnings("ignore")
 print('Current Working Directory : ',os.getcwd())
 print('#'*60)
-print(' Data Preprocessing Script Started {}'.format(datetime.datetime.now()))
+print(' Data Pre-processing Script Started {}'.format(datetime.datetime.now()))
 
 ###################################################################
 # Read the files                                                  #
@@ -25,6 +25,8 @@ print(' Data Preprocessing Script Started {}'.format(datetime.datetime.now()))
 confirmed=pd.read_csv('time_series_covid19_confirmed_global.csv')
 deaths=pd.read_csv('time_series_covid19_deaths_global.csv')
 recovered=pd.read_csv('time_series_covid19_recovered_global.csv')
+
+lat_lon_data=pd.read_csv('lat_lon_data.csv')
 
 print(' *** Data load completed *** ')
 
@@ -37,7 +39,7 @@ cols=list(confirmed)
 cols.remove('Country/Region')
 confirmed_country_group=confirmed.groupby(['Country/Region'])[cols].sum().reset_index()
 
-print(' *** Data pre-prossing on confirmed cases completed *** ')
+print(' *** Data Pre-prossing on confirmed cases completed *** ')
 
 ###################################################################
 # Clean the Recovery Cases File                                   #
@@ -49,12 +51,11 @@ cols=list(recovered)
 cols.remove('Country/Region')
 recovered_country_group=recovered.groupby(['Country/Region'])[cols].sum().reset_index()
 
-print(' *** Data pre-prossing on recovered cases completed *** ')
+print(' *** Data Pre-processing on recovered cases completed *** ')
 
 ###################################################################
 # Clean the Deaths File                                           #
 ###################################################################                                 
-
 
 # Deaths Cases Data - Processing
 deaths.drop(columns=['Province/State','Lat','Long'],inplace=True)
@@ -62,7 +63,7 @@ cols=list(deaths)
 cols.remove('Country/Region')
 deaths_country_group=deaths.groupby(['Country/Region'])[cols].sum().reset_index()
 
-print(' *** Data pre-prossing on death cases completed *** ')
+print(' *** Data Pre-processing on death cases completed *** ')
 
 ###################################################################
 # Create the Date file                                            #
@@ -142,12 +143,24 @@ deaths_cases_frame['Dates']=pd.to_datetime(deaths_cases_frame['Dates'],format='%
 deaths_cases_frame['Dates']=deaths_cases_frame['Dates'].apply(lambda x:x.date())
 
 print(' *** Transformation of deaths_cases data completed *** ')
+
 print(' *** Transformation of datasets completed *** ')
+
+###################################################################
+# Create Latest Data                                              #
+################################################################### 
+
+deaths_max_date=deaths_cases_frame[deaths_cases_frame['Dates']==deaths_cases_frame['Dates'].max()]
+recovered_max_date=recovered_cases_frame[recovered_cases_frame['Dates']==recovered_cases_frame['Dates'].max()]
+confirmed_max_date=confirmed_cases_frame[confirmed_cases_frame['Dates']==confirmed_cases_frame['Dates'].max()]
+
+confirmed_max_date['Dates']=pd.to_datetime(confirmed_max_date['Dates'],format='%Y-%m-%d')
 
 ###################################################################
 # Set up Latitudes and Longitudes                                 #
 ###################################################################  
 
+"""
 print(' *** Inititating Geo Py to set up Latitutes and Logitudes *** ')
 country_list=confirmed_cases_frame['Country'].unique()
 
@@ -180,21 +193,11 @@ def longitude_extractor(x):
 confirmed_cases_frame['latitude']=confirmed_cases_frame['Country'].map(latitude_extractor)
 confirmed_cases_frame['longitudes']=confirmed_cases_frame['Country'].map(longitude_extractor)
 
-confirmed_cases_frame['Dates']=pd.to_datetime(confirmed_cases_frame['Dates'],format='%Y-%m-%d')
-confirmed_cases_temp=confirmed_cases_frame[confirmed_cases_frame['Confirmed']>0]
-confirmed_cases_timeline=confirmed_cases_temp.sort_values('Dates').groupby('Country').head(1)
-confirmed_cases_timeline.sort_values(['Dates'],inplace=True)
-confirmed_cases_timeline['Date_id']=confirmed_cases_timeline.groupby('Dates').ngroup()
-
 print(' *** Geo Py coding ended successfully. Saving the Files *** ')
+"""
+lat_lon_data.drop(columns=['Unnamed: 0'],inplace=True)
+confirmed_max_date=confirmed_max_date.merge(lat_lon_data,on='Country')
 
-###################################################################
-# Create Latest Data                                              #
-################################################################### 
-
-deaths_max_date=deaths_cases_frame[deaths_cases_frame['Dates']==deaths_cases_frame['Dates'].max()]
-recovered_max_date=recovered_cases_frame[recovered_cases_frame['Dates']==recovered_cases_frame['Dates'].max()]
-confirmed_max_date=confirmed_cases_frame[confirmed_cases_frame['Dates']==confirmed_cases_frame['Dates'].max()]
 
 ###################################################################
 # Save Files                                                      #
@@ -213,3 +216,5 @@ recovered_max_date.to_csv('pre_processed_recovered_max_date.csv')
 deaths_max_date.to_csv('pre_processed_deaths_max_date.csv')
 
 print(' All the Files Saved. Program Ended Successfully *** ')
+
+print('#'*60)
