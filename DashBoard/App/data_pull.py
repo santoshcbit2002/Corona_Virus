@@ -77,4 +77,4 @@ if __name__ == "__main__":
         filename=k+extension
         data.to_csv(filename,encoding='utf-8',index=False)
         print('Data extraction complete for Date {}. Shape of data {}.'.format(k,data.shape))
-        time.sleep(60) 
+        time.sleep(40) 

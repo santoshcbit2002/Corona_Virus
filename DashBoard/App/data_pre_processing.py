@@ -10,16 +10,27 @@ import geopy
 from geopy.geocoders import Nominatim
 from geopy.exc import GeocoderTimedOut
 
+###################################################################
+# Initiate Program                                                #
+################################################################### 
+
 warnings.filterwarnings("ignore")
 print('Current Working Directory : ',os.getcwd())
 print('#'*60)
 print(' Data Preprocessing Script Started {}'.format(datetime.datetime.now()))
 
+###################################################################
+# Read the files                                                  #
+################################################################### 
 confirmed=pd.read_csv('time_series_covid19_confirmed_global.csv')
 deaths=pd.read_csv('time_series_covid19_deaths_global.csv')
 recovered=pd.read_csv('time_series_covid19_recovered_global.csv')
 
 print(' *** Data load completed *** ')
+
+###################################################################
+# Clean the Confirmed Cases File                                  #
+################################################################### 
 # Confirmed Cases Data - Processing
 confirmed.drop(columns=['Province/State','Lat','Long'],inplace=True)
 cols=list(confirmed)
@@ -27,6 +38,10 @@ cols.remove('Country/Region')
 confirmed_country_group=confirmed.groupby(['Country/Region'])[cols].sum().reset_index()
 
 print(' *** Data pre-prossing on confirmed cases completed *** ')
+
+###################################################################
+# Clean the Recovery Cases File                                   #
+################################################################### 
 
 # Recovery Cases Data - Processing
 recovered.drop(columns=['Province/State','Lat','Long'],inplace=True)
@@ -36,6 +51,11 @@ recovered_country_group=recovered.groupby(['Country/Region'])[cols].sum().reset_
 
 print(' *** Data pre-prossing on recovered cases completed *** ')
 
+###################################################################
+# Clean the Deaths File                                           #
+###################################################################                                 
+
+
 # Deaths Cases Data - Processing
 deaths.drop(columns=['Province/State','Lat','Long'],inplace=True)
 cols=list(deaths)
@@ -44,6 +64,9 @@ deaths_country_group=deaths.groupby(['Country/Region'])[cols].sum().reset_index(
 
 print(' *** Data pre-prossing on death cases completed *** ')
 
+###################################################################
+# Create the Date file                                            #
+###################################################################  
 # Create Date list
 date_list=list(confirmed_country_group)
 date_list.remove('Country/Region')
@@ -57,7 +80,10 @@ max_date=max(date_list_formatted)
 print(' *** Latest Date of the Data: ', max_date)
 print(' *** Starting the Transformation of Data *** ')
 
-# Transformation of Confirmed Cases Data 
+###################################################################
+# Transform Confirmed Cases Data                                  #
+###################################################################  
+
 countries_list=confirmed_country_group['Country/Region'].unique()
 col_tran=list(confirmed_country_group)
 col_tran.remove('Country/Region')
@@ -75,7 +101,10 @@ confirmed_cases_frame['Dates']=confirmed_cases_frame['Dates'].apply(lambda x:x.d
 
 print(' *** Transformation of confirmed_cases data completed *** ')
 
-# Transformation of Recovered Data
+###################################################################
+# Transform Recovered Cases Data                                  #
+###################################################################  
+
 recovered_list=recovered_country_group['Country/Region'].unique()
 col_tran=list(recovered_country_group)
 col_tran.remove('Country/Region')
@@ -93,7 +122,9 @@ recovered_cases_frame['Dates']=recovered_cases_frame['Dates'].apply(lambda x:x.d
 
 print(' *** Transformation of recovered_cases data completed *** ')
 
-# Transformation of Deaths Data
+###################################################################
+# Transform Deaths Cases Data                                     #
+###################################################################  
 
 deaths_list=deaths_country_group['Country/Region'].unique()
 col_tran=list(deaths_country_group)
@@ -112,13 +143,11 @@ deaths_cases_frame['Dates']=deaths_cases_frame['Dates'].apply(lambda x:x.date())
 
 print(' *** Transformation of deaths_cases data completed *** ')
 print(' *** Transformation of datasets completed *** ')
-# Create data required for latest date
 
-deaths_max_date=deaths_cases_frame[deaths_cases_frame['Dates']==deaths_cases_frame['Dates'].max()]
-recovered_max_date=recovered_cases_frame[recovered_cases_frame['Dates']==recovered_cases_frame['Dates'].max()]
-confirmed_max_date=confirmed_cases_frame[confirmed_cases_frame['Dates']==confirmed_cases_frame['Dates'].max()]
+###################################################################
+# Set up Latitudes and Longitudes                                 #
+###################################################################  
 
-# Set up Latitudes and Longitudes
 print(' *** Inititating Geo Py to set up Latitutes and Logitudes *** ')
 country_list=confirmed_cases_frame['Country'].unique()
 
@@ -131,8 +160,9 @@ def do_geocode(x):
 
 vals=[]
 keys=[]
+
 start_time=datetime.datetime.now()
-print(' *** Geo Py coding Starting *** ')
+print(' *** Geo Py code Starting *** ')
 
 for i in country_list:
     location=do_geocode(i)
@@ -158,6 +188,17 @@ confirmed_cases_timeline['Date_id']=confirmed_cases_timeline.groupby('Dates').ng
 
 print(' *** Geo Py coding ended successfully. Saving the Files *** ')
 
+###################################################################
+# Create Latest Data                                              #
+################################################################### 
+
+deaths_max_date=deaths_cases_frame[deaths_cases_frame['Dates']==deaths_cases_frame['Dates'].max()]
+recovered_max_date=recovered_cases_frame[recovered_cases_frame['Dates']==recovered_cases_frame['Dates'].max()]
+confirmed_max_date=confirmed_cases_frame[confirmed_cases_frame['Dates']==confirmed_cases_frame['Dates'].max()]
+
+###################################################################
+# Save Files                                                      #
+################################################################### 
 # Save all the files 
 # Save Confirmed, Received and Death cases  (# Plots - 1,2,3 and 5 - Time line curves)
 
@@ -165,16 +206,10 @@ confirmed_cases_frame.to_csv('pre_processed_confirmed_cases.csv')
 recovered_cases_frame.to_csv('pre_processed_recovered_cases.csv')
 deaths_cases_frame.to_csv('pre_processed_deaths_cases.csv')
 
-# Save Confirmed, Received and Death cases for Max date  (# Plot 4)
+# Save Confirmed, Received and Death cases for Max date  (# Plot 4 and 6 - Map)
 
 confirmed_max_date.to_csv('pre_processed_confirmed_max_date.csv')
 recovered_max_date.to_csv('pre_processed_recovered_max_date.csv')
 deaths_max_date.to_csv('pre_processed_deaths_max_date.csv')
-
-
-# Save Confirmed, Received and Death cases for Max date  (# Plot 6 - Map)
-
-confirmed_cases_timeline.to_csv('pre_processed_confirmed_cases_timeline.csv')
-
 
 print(' All the Files Saved. Program Ended Successfully *** ')
