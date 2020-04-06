@@ -2,10 +2,9 @@ import pandas as pd
 import numpy as np
 import warnings
 import time
-from geopy.geocoders import Nominatim
+#from geopy.geocoders import Nominatim
 #import datetime
 import os
-import plotly.graph_objs as go
 #import geopy
 import smtplib
 from datetime import datetime,timedelta
@@ -117,7 +116,7 @@ max_date=max(date_list_formatted)
 
 print(' *** Latest Date of the Data: ', max_date)
 
-yesterday=datetime.strftime(datetime.now() - timedelta(10), '%Y-%m-%d')
+yesterday=datetime.strftime(datetime.now() - timedelta(1), '%Y-%m-%d')
 print(yesterday)
 
 if  max_date == yesterday:
