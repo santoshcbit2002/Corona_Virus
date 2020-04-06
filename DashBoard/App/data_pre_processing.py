@@ -3,12 +3,14 @@ import numpy as np
 import warnings
 import time
 from geopy.geocoders import Nominatim
-import datetime
+#import datetime
 import os
 import plotly.graph_objs as go
-import geopy
-from geopy.geocoders import Nominatim
-from geopy.exc import GeocoderTimedOut
+#import geopy
+import smtplib
+from datetime import datetime,timedelta
+#from geopy.geocoders import Nominatim
+#from geopy.exc import GeocoderTimedOut
 
 ###################################################################
 # Initiate Program                                                #
@@ -17,16 +19,51 @@ from geopy.exc import GeocoderTimedOut
 warnings.filterwarnings("ignore")
 print('Current Working Directory : ',os.getcwd())
 print('#'*60)
-print(' Data Pre-processing Script Started {}'.format(datetime.datetime.now()))
+print(' Data Pre-processing Script Started {}'.format(datetime.now()))
+process_flag='N'
+message_txt=''
+
+###################################################################
+# Define  helper functions                                     #
+################################################################### 
+def sendemail(from_addr, to_addr_list,
+              subject, message,
+              login, password,
+              smtpserver='smtp.gmail.com:587', cc_addr_list=[]):
+    header  = 'From: %s\n' % from_addr
+    header += 'To: %s\n' % ','.join(to_addr_list)
+    header += 'Cc: %s\n' % ','.join(cc_addr_list)
+    header += 'Subject: %s\n\n' % subject
+    message = header + message
+ 
+    server = smtplib.SMTP(smtpserver)
+    server.starttls()
+    server.login(login,password)
+    problems = server.sendmail(from_addr, to_addr_list, message)
+    server.quit()
+    return problems
+
+def triggeremail(message_txt):    
+     sendemail(from_addr    = 'dashboardstest2020@gmail.com', 
+          to_addr_list = ['bhargavi.sivapurapu@gmail.com','santosh.cbit2002@gmail.com'],
+          subject      = 'Hello', 
+          message      = message_txt, 
+          login        = 'dashboardstest2020@gmail.com', 
+          password     = 'offbduwbzbrizdrg') 
 
 ###################################################################
 # Read the files                                                  #
 ################################################################### 
-confirmed=pd.read_csv('time_series_covid19_confirmed_global.csv')
-deaths=pd.read_csv('time_series_covid19_deaths_global.csv')
-recovered=pd.read_csv('time_series_covid19_recovered_global.csv')
+try:
+    confirmed=pd.read_csv('time_series_covid19_confirmed_global.csv')
+    deaths=pd.read_csv('time_series_covid19_deaths_global.csv')
+    recovered=pd.read_csv('time_series_covid19_recovered_global.csv')
+    lat_lon_data=pd.read_csv('lat_lon_data.csv')
+    process_flag='Y' 
 
-lat_lon_data=pd.read_csv('lat_lon_data.csv')
+except:
+    print('error')
+    message_txt='File read failed'
 
 print(' *** Data load completed *** ')
 
@@ -74,11 +111,28 @@ date_list.remove('Country/Region')
 
 date_list_formatted=[]
 for i in date_list:
-    date_list_formatted.append((datetime.datetime.strptime(i, '%m/%d/%y')).date().isoformat())
+    date_list_formatted.append((datetime.strptime(i, '%m/%d/%y')).date().isoformat())
 
 max_date=max(date_list_formatted)
 
 print(' *** Latest Date of the Data: ', max_date)
+
+yesterday=datetime.strftime(datetime.now() - timedelta(10), '%Y-%m-%d')
+print(yesterday)
+
+if  max_date == yesterday:
+    process_flag='Y'    
+else:
+    message_txt= message_txt+'Date update failed'
+    print('error-2')
+    process_flag='N'
+
+if  process_flag =='Y' :
+     triggeremail('Update was successful')
+        
+else:
+    triggeremail(message_txt)
+
 print(' *** Starting the Transformation of Data *** ')
 
 ###################################################################
@@ -160,41 +214,6 @@ confirmed_max_date['Dates']=pd.to_datetime(confirmed_max_date['Dates'],format='%
 # Set up Latitudes and Longitudes                                 #
 ###################################################################  
 
-"""
-print(' *** Inititating Geo Py to set up Latitutes and Logitudes *** ')
-country_list=confirmed_cases_frame['Country'].unique()
-
-def do_geocode(x):
-    geopy = Nominatim()
-    try:
-        return geopy.geocode(x)
-    except GeocoderTimedOut:
-        return do_geocode(x)
-
-vals=[]
-keys=[]
-
-start_time=datetime.datetime.now()
-print(' *** Geo Py code Starting *** ')
-
-for i in country_list:
-    location=do_geocode(i)
-    keys.append(i)
-    vals.append([location.latitude,location.longitude])
-
-print(' *** Geo Py code Ended. total elapsed time {} *** '.format(start_time-datetime.datetime.now()))
-
-dictionary=dict(zip(keys,vals))
-def latitude_extractor(x):
-    return dictionary[x][0]
-def longitude_extractor(x):
-    return dictionary[x][1]
-
-confirmed_cases_frame['latitude']=confirmed_cases_frame['Country'].map(latitude_extractor)
-confirmed_cases_frame['longitudes']=confirmed_cases_frame['Country'].map(longitude_extractor)
-
-print(' *** Geo Py coding ended successfully. Saving the Files *** ')
-"""
 lat_lon_data.drop(columns=['Unnamed: 0'],inplace=True)
 confirmed_max_date=confirmed_max_date.merge(lat_lon_data,on='Country')
 
