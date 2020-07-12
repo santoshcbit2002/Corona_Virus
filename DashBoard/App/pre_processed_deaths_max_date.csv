@@ -1,181 +1,189 @@
 ,Country,Dates,Deaths
-69,Afghanistan,2020-03-31,4
-69,Albania,2020-03-31,15
-69,Algeria,2020-03-31,44
-69,Andorra,2020-03-31,12
-69,Angola,2020-03-31,2
-69,Antigua and Barbuda,2020-03-31,0
-69,Argentina,2020-03-31,27
-69,Armenia,2020-03-31,3
-69,Australia,2020-03-31,18
-69,Austria,2020-03-31,128
-69,Azerbaijan,2020-03-31,5
-69,Bahamas,2020-03-31,0
-69,Bahrain,2020-03-31,4
-69,Bangladesh,2020-03-31,5
-69,Barbados,2020-03-31,0
-69,Belarus,2020-03-31,1
-69,Belgium,2020-03-31,705
-69,Belize,2020-03-31,0
-69,Benin,2020-03-31,0
-69,Bhutan,2020-03-31,0
-69,Bolivia,2020-03-31,6
-69,Bosnia and Herzegovina,2020-03-31,13
-69,Botswana,2020-03-31,1
-69,Brazil,2020-03-31,201
-69,Brunei,2020-03-31,1
-69,Bulgaria,2020-03-31,8
-69,Burkina Faso,2020-03-31,14
-69,Burma,2020-03-31,1
-69,Burundi,2020-03-31,0
-69,Cabo Verde,2020-03-31,1
-69,Cambodia,2020-03-31,0
-69,Cameroon,2020-03-31,6
-69,Canada,2020-03-31,101
-69,Central African Republic,2020-03-31,0
-69,Chad,2020-03-31,0
-69,Chile,2020-03-31,12
-69,China,2020-03-31,3309
-69,Colombia,2020-03-31,16
-69,Congo (Brazzaville),2020-03-31,0
-69,Congo (Kinshasa),2020-03-31,8
-69,Costa Rica,2020-03-31,2
-69,Cote d'Ivoire,2020-03-31,1
-69,Croatia,2020-03-31,6
-69,Cuba,2020-03-31,6
-69,Cyprus,2020-03-31,8
-69,Czechia,2020-03-31,31
-69,Denmark,2020-03-31,90
-69,Diamond Princess,2020-03-31,10
-69,Djibouti,2020-03-31,0
-69,Dominica,2020-03-31,0
-69,Dominican Republic,2020-03-31,51
-69,Ecuador,2020-03-31,75
-69,Egypt,2020-03-31,46
-69,El Salvador,2020-03-31,1
-69,Equatorial Guinea,2020-03-31,0
-69,Eritrea,2020-03-31,0
-69,Estonia,2020-03-31,4
-69,Eswatini,2020-03-31,0
-69,Ethiopia,2020-03-31,0
-69,Fiji,2020-03-31,0
-69,Finland,2020-03-31,17
-69,France,2020-03-31,3532
-69,Gabon,2020-03-31,1
-69,Gambia,2020-03-31,1
-69,Georgia,2020-03-31,0
-69,Germany,2020-03-31,775
-69,Ghana,2020-03-31,5
-69,Greece,2020-03-31,49
-69,Grenada,2020-03-31,0
-69,Guatemala,2020-03-31,1
-69,Guinea,2020-03-31,0
-69,Guinea-Bissau,2020-03-31,0
-69,Guyana,2020-03-31,2
-69,Haiti,2020-03-31,0
-69,Holy See,2020-03-31,0
-69,Honduras,2020-03-31,7
-69,Hungary,2020-03-31,16
-69,Iceland,2020-03-31,2
-69,India,2020-03-31,35
-69,Indonesia,2020-03-31,136
-69,Iran,2020-03-31,2898
-69,Iraq,2020-03-31,50
-69,Ireland,2020-03-31,71
-69,Israel,2020-03-31,20
-69,Italy,2020-03-31,12428
-69,Jamaica,2020-03-31,1
-69,Japan,2020-03-31,56
-69,Jordan,2020-03-31,5
-69,Kazakhstan,2020-03-31,2
-69,Kenya,2020-03-31,1
-69,"Korea, South",2020-03-31,162
-69,Kosovo,2020-03-31,1
-69,Kuwait,2020-03-31,0
-69,Kyrgyzstan,2020-03-31,0
-69,Laos,2020-03-31,0
-69,Latvia,2020-03-31,0
-69,Lebanon,2020-03-31,12
-69,Liberia,2020-03-31,0
-69,Libya,2020-03-31,0
-69,Liechtenstein,2020-03-31,0
-69,Lithuania,2020-03-31,8
-69,Luxembourg,2020-03-31,23
-69,MS Zaandam,2020-03-31,0
-69,Madagascar,2020-03-31,0
-69,Malaysia,2020-03-31,43
-69,Maldives,2020-03-31,0
-69,Mali,2020-03-31,2
-69,Malta,2020-03-31,0
-69,Mauritania,2020-03-31,1
-69,Mauritius,2020-03-31,5
-69,Mexico,2020-03-31,28
-69,Moldova,2020-03-31,4
-69,Monaco,2020-03-31,1
-69,Mongolia,2020-03-31,0
-69,Montenegro,2020-03-31,2
-69,Morocco,2020-03-31,36
-69,Mozambique,2020-03-31,0
-69,Namibia,2020-03-31,0
-69,Nepal,2020-03-31,0
-69,Netherlands,2020-03-31,1040
-69,New Zealand,2020-03-31,1
-69,Nicaragua,2020-03-31,1
-69,Niger,2020-03-31,3
-69,Nigeria,2020-03-31,2
-69,North Macedonia,2020-03-31,9
-69,Norway,2020-03-31,39
-69,Oman,2020-03-31,1
-69,Pakistan,2020-03-31,26
-69,Panama,2020-03-31,30
-69,Papua New Guinea,2020-03-31,0
-69,Paraguay,2020-03-31,3
-69,Peru,2020-03-31,30
-69,Philippines,2020-03-31,88
-69,Poland,2020-03-31,33
-69,Portugal,2020-03-31,160
-69,Qatar,2020-03-31,2
-69,Romania,2020-03-31,82
-69,Russia,2020-03-31,17
-69,Rwanda,2020-03-31,0
-69,Saint Kitts and Nevis,2020-03-31,0
-69,Saint Lucia,2020-03-31,0
-69,Saint Vincent and the Grenadines,2020-03-31,0
-69,San Marino,2020-03-31,26
-69,Saudi Arabia,2020-03-31,10
-69,Senegal,2020-03-31,0
-69,Serbia,2020-03-31,16
-69,Seychelles,2020-03-31,0
-69,Sierra Leone,2020-03-31,0
-69,Singapore,2020-03-31,3
-69,Slovakia,2020-03-31,0
-69,Slovenia,2020-03-31,15
-69,Somalia,2020-03-31,0
-69,South Africa,2020-03-31,5
-69,Spain,2020-03-31,8464
-69,Sri Lanka,2020-03-31,2
-69,Sudan,2020-03-31,2
-69,Suriname,2020-03-31,0
-69,Sweden,2020-03-31,180
-69,Switzerland,2020-03-31,433
-69,Syria,2020-03-31,2
-69,Taiwan*,2020-03-31,5
-69,Tanzania,2020-03-31,1
-69,Thailand,2020-03-31,10
-69,Timor-Leste,2020-03-31,0
-69,Togo,2020-03-31,1
-69,Trinidad and Tobago,2020-03-31,3
-69,Tunisia,2020-03-31,10
-69,Turkey,2020-03-31,214
-69,US,2020-03-31,3873
-69,Uganda,2020-03-31,0
-69,Ukraine,2020-03-31,17
-69,United Arab Emirates,2020-03-31,6
-69,United Kingdom,2020-03-31,1793
-69,Uruguay,2020-03-31,1
-69,Uzbekistan,2020-03-31,2
-69,Venezuela,2020-03-31,3
-69,Vietnam,2020-03-31,0
-69,West Bank and Gaza,2020-03-31,1
-69,Zambia,2020-03-31,0
-69,Zimbabwe,2020-03-31,1
+171,Afghanistan,2020-07-11,994
+171,Albania,2020-07-11,89
+171,Algeria,2020-07-11,1004
+171,Andorra,2020-07-11,52
+171,Angola,2020-07-11,23
+171,Antigua and Barbuda,2020-07-11,3
+171,Argentina,2020-07-11,1810
+171,Armenia,2020-07-11,559
+171,Australia,2020-07-11,108
+171,Austria,2020-07-11,706
+171,Azerbaijan,2020-07-11,298
+171,Bahamas,2020-07-11,11
+171,Bahrain,2020-07-11,104
+171,Bangladesh,2020-07-11,2305
+171,Barbados,2020-07-11,7
+171,Belarus,2020-07-11,459
+171,Belgium,2020-07-11,9782
+171,Belize,2020-07-11,2
+171,Benin,2020-07-11,26
+171,Bhutan,2020-07-11,0
+171,Bolivia,2020-07-11,1754
+171,Bosnia and Herzegovina,2020-07-11,219
+171,Botswana,2020-07-11,1
+171,Brazil,2020-07-11,71469
+171,Brunei,2020-07-11,3
+171,Bulgaria,2020-07-11,267
+171,Burkina Faso,2020-07-11,53
+171,Burma,2020-07-11,6
+171,Burundi,2020-07-11,1
+171,Cabo Verde,2020-07-11,19
+171,Cambodia,2020-07-11,0
+171,Cameroon,2020-07-11,359
+171,Canada,2020-07-11,8818
+171,Central African Republic,2020-07-11,53
+171,Chad,2020-07-11,74
+171,Chile,2020-07-11,6881
+171,China,2020-07-11,4641
+171,Colombia,2020-07-11,5202
+171,Comoros,2020-07-11,7
+171,Congo (Brazzaville),2020-07-11,47
+171,Congo (Kinshasa),2020-07-11,189
+171,Costa Rica,2020-07-11,28
+171,Cote d'Ivoire,2020-07-11,82
+171,Croatia,2020-07-11,118
+171,Cuba,2020-07-11,87
+171,Cyprus,2020-07-11,19
+171,Czechia,2020-07-11,352
+171,Denmark,2020-07-11,609
+171,Diamond Princess,2020-07-11,13
+171,Djibouti,2020-07-11,56
+171,Dominica,2020-07-11,0
+171,Dominican Republic,2020-07-11,880
+171,Ecuador,2020-07-11,5031
+171,Egypt,2020-07-11,3769
+171,El Salvador,2020-07-11,254
+171,Equatorial Guinea,2020-07-11,51
+171,Eritrea,2020-07-11,0
+171,Estonia,2020-07-11,69
+171,Eswatini,2020-07-11,18
+171,Ethiopia,2020-07-11,124
+171,Fiji,2020-07-11,0
+171,Finland,2020-07-11,329
+171,France,2020-07-11,30007
+171,Gabon,2020-07-11,46
+171,Gambia,2020-07-11,3
+171,Georgia,2020-07-11,15
+171,Germany,2020-07-11,9070
+171,Ghana,2020-07-11,135
+171,Greece,2020-07-11,193
+171,Grenada,2020-07-11,0
+171,Guatemala,2020-07-11,1172
+171,Guinea,2020-07-11,37
+171,Guinea-Bissau,2020-07-11,26
+171,Guyana,2020-07-11,17
+171,Haiti,2020-07-11,139
+171,Holy See,2020-07-11,0
+171,Honduras,2020-07-11,771
+171,Hungary,2020-07-11,595
+171,Iceland,2020-07-11,10
+171,India,2020-07-11,22673
+171,Indonesia,2020-07-11,3535
+171,Iran,2020-07-11,12635
+171,Iraq,2020-07-11,3055
+171,Ireland,2020-07-11,1746
+171,Israel,2020-07-11,354
+171,Italy,2020-07-11,34945
+171,Jamaica,2020-07-11,10
+171,Japan,2020-07-11,982
+171,Jordan,2020-07-11,10
+171,Kazakhstan,2020-07-11,264
+171,Kenya,2020-07-11,184
+171,"Korea, South",2020-07-11,289
+171,Kosovo,2020-07-11,101
+171,Kuwait,2020-07-11,386
+171,Kyrgyzstan,2020-07-11,129
+171,Laos,2020-07-11,0
+171,Latvia,2020-07-11,30
+171,Lebanon,2020-07-11,36
+171,Lesotho,2020-07-11,1
+171,Liberia,2020-07-11,47
+171,Libya,2020-07-11,38
+171,Liechtenstein,2020-07-11,1
+171,Lithuania,2020-07-11,79
+171,Luxembourg,2020-07-11,110
+171,MS Zaandam,2020-07-11,2
+171,Madagascar,2020-07-11,34
+171,Malawi,2020-07-11,33
+171,Malaysia,2020-07-11,122
+171,Maldives,2020-07-11,13
+171,Mali,2020-07-11,121
+171,Malta,2020-07-11,9
+171,Mauritania,2020-07-11,147
+171,Mauritius,2020-07-11,10
+171,Mexico,2020-07-11,34730
+171,Moldova,2020-07-11,640
+171,Monaco,2020-07-11,4
+171,Mongolia,2020-07-11,0
+171,Montenegro,2020-07-11,23
+171,Morocco,2020-07-11,245
+171,Mozambique,2020-07-11,9
+171,Namibia,2020-07-11,1
+171,Nepal,2020-07-11,38
+171,Netherlands,2020-07-11,6156
+171,New Zealand,2020-07-11,22
+171,Nicaragua,2020-07-11,91
+171,Niger,2020-07-11,68
+171,Nigeria,2020-07-11,724
+171,North Macedonia,2020-07-11,376
+171,Norway,2020-07-11,252
+171,Oman,2020-07-11,248
+171,Pakistan,2020-07-11,5197
+171,Panama,2020-07-11,893
+171,Papua New Guinea,2020-07-11,0
+171,Paraguay,2020-07-11,21
+171,Peru,2020-07-11,11682
+171,Philippines,2020-07-11,1372
+171,Poland,2020-07-11,1568
+171,Portugal,2020-07-11,1654
+171,Qatar,2020-07-11,146
+171,Romania,2020-07-11,1871
+171,Russia,2020-07-11,11188
+171,Rwanda,2020-07-11,4
+171,Saint Kitts and Nevis,2020-07-11,0
+171,Saint Lucia,2020-07-11,0
+171,Saint Vincent and the Grenadines,2020-07-11,0
+171,San Marino,2020-07-11,42
+171,Sao Tome and Principe,2020-07-11,14
+171,Saudi Arabia,2020-07-11,2181
+171,Senegal,2020-07-11,145
+171,Serbia,2020-07-11,382
+171,Seychelles,2020-07-11,0
+171,Sierra Leone,2020-07-11,63
+171,Singapore,2020-07-11,26
+171,Slovakia,2020-07-11,28
+171,Slovenia,2020-07-11,111
+171,Somalia,2020-07-11,92
+171,South Africa,2020-07-11,3971
+171,South Sudan,2020-07-11,38
+171,Spain,2020-07-11,28403
+171,Sri Lanka,2020-07-11,11
+171,Sudan,2020-07-11,650
+171,Suriname,2020-07-11,18
+171,Sweden,2020-07-11,5526
+171,Switzerland,2020-07-11,1968
+171,Syria,2020-07-11,16
+171,Taiwan*,2020-07-11,7
+171,Tajikistan,2020-07-11,55
+171,Tanzania,2020-07-11,21
+171,Thailand,2020-07-11,58
+171,Timor-Leste,2020-07-11,0
+171,Togo,2020-07-11,15
+171,Trinidad and Tobago,2020-07-11,8
+171,Tunisia,2020-07-11,50
+171,Turkey,2020-07-11,5344
+171,US,2020-07-11,134777
+171,Uganda,2020-07-11,0
+171,Ukraine,2020-07-11,1389
+171,United Arab Emirates,2020-07-11,331
+171,United Kingdom,2020-07-11,44883
+171,Uruguay,2020-07-11,30
+171,Uzbekistan,2020-07-11,57
+171,Venezuela,2020-07-11,85
+171,Vietnam,2020-07-11,0
+171,West Bank and Gaza,2020-07-11,33
+171,Western Sahara,2020-07-11,1
+171,Yemen,2020-07-11,365
+171,Zambia,2020-07-11,42
+171,Zimbabwe,2020-07-11,18

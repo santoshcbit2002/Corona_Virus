@@ -45,7 +45,7 @@ def sendemail(from_addr, to_addr_list,
 def triggeremail(message_txt):    
      sendemail(from_addr    = 'dashboardstest2020@gmail.com', 
           to_addr_list = ['bhargavi.sivapurapu@gmail.com','santosh.cbit2002@gmail.com'],
-          subject      = 'Hello', 
+          subject      = 'COVID19 DashBoard Data Pull and Pre-Processing Status', 
           message      = message_txt, 
           login        = 'dashboardstest2020@gmail.com', 
           password     = 'offbduwbzbrizdrg') 
@@ -53,16 +53,24 @@ def triggeremail(message_txt):
 ###################################################################
 # Read the files                                                  #
 ################################################################### 
+
+confirmed_file='https://raw.github.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_confirmed_global.csv'
+deaths_file='https://raw.github.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_deaths_global.csv'
+recovered_file='https://raw.github.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_recovered_global.csv'
+lat_lon_file='https://raw.github.com/santoshcbit2002/santoshcbit2002-Corona_Virus/master/DashBoard/App/lat_lon_data.csv'
+
 try:
-    confirmed=pd.read_csv('time_series_covid19_confirmed_global.csv')
-    deaths=pd.read_csv('time_series_covid19_deaths_global.csv')
-    recovered=pd.read_csv('time_series_covid19_recovered_global.csv')
-    lat_lon_data=pd.read_csv('lat_lon_data.csv')
+    confirmed=pd.read_csv(confirmed_file)
+    deaths=pd.read_csv(deaths_file)
+    recovered=pd.read_csv(recovered_file)
+    lat_lon_data=pd.read_csv(lat_lon_file)
     process_flag='Y' 
+    print(' *** All the four source files have been downloaded')
 
 except:
-    print('error')
-    message_txt='File read failed'
+    message_txt='File downloads have failed. Please check'
+    triggeremail(message_txt)
+    exit(0)
 
 print(' *** Data load completed *** ')
 
@@ -116,19 +124,21 @@ max_date=max(date_list_formatted)
 
 print(' *** Latest Date of the Data: ', max_date)
 
-yesterday=datetime.strftime(datetime.now() - timedelta(1), '%Y-%m-%d')
-print(yesterday)
+yesterday=datetime.strftime(datetime.now() - timedelta(2), '%Y-%m-%d')
 
+"""
 if  max_date == yesterday:
     process_flag='Y'    
 else:
     message_txt= message_txt+'Date update failed'
     print('error-2')
     process_flag='N'
+"""
 
 if  process_flag =='Y' :
-     triggeremail('Update was successful')
-        
+     message_txt_update='Update has been successful for date : '+str(max_date) + '\n' + 'All the files are saved successfully.'
+
+     triggeremail(message_txt_update)    
 else:
     triggeremail(message_txt)
 
@@ -203,11 +213,33 @@ print(' *** Transformation of datasets completed *** ')
 # Create Latest Data                                              #
 ################################################################### 
 
+print(' *** Creating Files for latest data  *** ')
 deaths_max_date=deaths_cases_frame[deaths_cases_frame['Dates']==deaths_cases_frame['Dates'].max()]
 recovered_max_date=recovered_cases_frame[recovered_cases_frame['Dates']==recovered_cases_frame['Dates'].max()]
 confirmed_max_date=confirmed_cases_frame[confirmed_cases_frame['Dates']==confirmed_cases_frame['Dates'].max()]
 
 confirmed_max_date['Dates']=pd.to_datetime(confirmed_max_date['Dates'],format='%Y-%m-%d')
+
+print(' *** Created Files for latest data  *** ')
+
+
+###################################################################
+# Create Latest minus 1 day Data                                  #
+################################################################### 
+
+print(' *** Creating Files for latest minus one data  *** ')
+
+confirmed_cases_frame['Dates']=confirmed_cases_frame['Dates'].astype(str)
+recovered_cases_frame['Dates']=recovered_cases_frame['Dates'].astype(str)
+deaths_cases_frame['Dates']=deaths_cases_frame['Dates'].astype(str)
+
+deaths_max_date_minus_one_day=deaths_cases_frame[deaths_cases_frame['Dates']==yesterday]
+recovered_max_date_minus_one_day=recovered_cases_frame[recovered_cases_frame['Dates']==yesterday]
+confirmed_max_date_minus_one_day=confirmed_cases_frame[confirmed_cases_frame['Dates']==yesterday]
+
+print(' *** Shape of yesterday data ',confirmed_max_date_minus_one_day.shape)
+
+print(' *** Created Files for latest data minus one day *** ')
 
 ###################################################################
 # Set up Latitudes and Longitudes                                 #
@@ -215,12 +247,44 @@ confirmed_max_date['Dates']=pd.to_datetime(confirmed_max_date['Dates'],format='%
 
 lat_lon_data.drop(columns=['Unnamed: 0'],inplace=True)
 confirmed_max_date=confirmed_max_date.merge(lat_lon_data,on='Country')
+print(' *** Set up of Latitude-Longitude file is Complete  *** ')
 
+###################################################################
+# Create Files used for Animation                                 #
+###################################################################  
+
+print(' *** Creating files for Animation  *** ')
+
+deaths_cases_frame['Dates']=deaths_cases_frame['Dates'].astype(str)
+confirmed_cases_frame['Dates']=confirmed_cases_frame['Dates'].astype(str)
+
+deaths_cases_frame['key']=deaths_cases_frame['Dates']+deaths_cases_frame['Country']
+confirmed_cases_frame['key']=confirmed_cases_frame['Dates']+confirmed_cases_frame['Country']
+
+combined_frame=confirmed_cases_frame.merge(deaths_cases_frame,on='key')
+
+combined_frame.drop(columns=['Dates_y','Country_y','key'],inplace=True)
+combined_frame.rename(columns={'Country_x':'Country','Dates_x':'Dates'},inplace=True)
+
+combined_frame_master=pd.DataFrame(columns=['Dates','Country','Confirmed','Deaths'])
+
+
+for i in list(combined_frame['Country'].unique()):
+    temp=combined_frame[combined_frame['Country']==i]
+    temp['Dates']=pd.to_datetime(temp['Dates'])
+    temp=temp.set_index('Dates')
+    temp_resamp=temp.resample('D').interpolate()[::3].reset_index()
+    combined_frame_master=combined_frame_master.append(temp_resamp,ignore_index=True)
+    
+combined_frame_master['Dates']=combined_frame_master['Dates'].astype(str)
+combined_frame_master['Confirmed Cases (Scaled for purpose of graph)']=combined_frame_master['Confirmed'].apply(lambda x : np.arcsinh(x))
+combined_frame_master.rename(columns={'Confirmed':'Confirmed Cases'},inplace=True)
+
+print(' *** Completed set up of Animation files  *** ')
 
 ###################################################################
 # Save Files                                                      #
 ################################################################### 
-# Save all the files 
 # Save Confirmed, Received and Death cases  (# Plots - 1,2,3 and 5 - Time line curves)
 
 confirmed_cases_frame.to_csv('pre_processed_confirmed_cases.csv')
@@ -232,6 +296,15 @@ deaths_cases_frame.to_csv('pre_processed_deaths_cases.csv')
 confirmed_max_date.to_csv('pre_processed_confirmed_max_date.csv')
 recovered_max_date.to_csv('pre_processed_recovered_max_date.csv')
 deaths_max_date.to_csv('pre_processed_deaths_max_date.csv')
+
+# Save Confirmed, Received and Death cases for previous day 
+confirmed_max_date_minus_one_day.to_csv('pre_processed_confirmed_max_date_minus_one_day.csv')
+recovered_max_date_minus_one_day.to_csv('pre_processed_recovered_max_date_minus_one_day.csv')
+deaths_max_date_minus_one_day.to_csv('pre_processed_deaths_max_date_minus_one_day.csv')
+
+
+# Save files for Animated plot 
+combined_frame_master.to_csv('pre_processed_combined_frame_master.csv')
 
 print(' All the Files Saved. Program Ended Successfully *** ')
 
